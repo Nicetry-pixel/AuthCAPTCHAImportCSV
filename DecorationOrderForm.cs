@@ -343,5 +343,38 @@ namespace AuthCAPTCHAImportCSV
 
             return true;
         }
+
+        private void txtClientName_TextChanged(object sender, EventArgs e)
+        {
+            var text = txtClientName.Text;
+            var allowedChars = new System.Text.StringBuilder();
+            bool hadInvalid = false;
+
+            foreach(char c in text)
+            {
+                if ((c >= 'А' && c <= 'Я') || (c >= 'а' && c <= 'я')|| c == 'Ё' || c == 'ё')
+                {
+                    allowedChars.Append(c);
+                }
+                else
+                {
+                    hadInvalid = true;
+                }
+            }
+
+            if (hadInvalid)
+            {
+                MessageBox.Show("Разрешены только русские буквы (А-я, а-я, Ё,ё).",
+                    "Некорректный ввод",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                    );
+            }
+            if (allowedChars.Length < text.Length)
+            {
+                txtClientName.Text = allowedChars.ToString();
+                txtClientName.SelectionStart = txtClientName.Text.Length;
+            }
+        }
     }
 }

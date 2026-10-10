@@ -51,6 +51,7 @@
         private void InitializeComponent()
         {
             this.headerPanel = new System.Windows.Forms.Panel();
+            this.logoPictureBox = new System.Windows.Forms.PictureBox();
             this.titleLabel = new System.Windows.Forms.Label();
             this.lblUser = new System.Windows.Forms.Label();
             this.btnBack = new System.Windows.Forms.Button();
@@ -78,13 +79,12 @@
             this.dgvOrderProducts = new System.Windows.Forms.DataGridView();
             this.bottomPanel = new System.Windows.Forms.Panel();
             this.btnSave = new System.Windows.Forms.Button();
-            this.logoPictureBox = new System.Windows.Forms.PictureBox();
             this.headerPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).BeginInit();
             this.contentPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudQuantity)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrderProducts)).BeginInit();
             this.bottomPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // headerPanel
@@ -99,6 +99,16 @@
             this.headerPanel.Name = "headerPanel";
             this.headerPanel.Size = new System.Drawing.Size(900, 90);
             this.headerPanel.TabIndex = 2;
+            // 
+            // logoPictureBox
+            // 
+            this.logoPictureBox.Image = global::AuthCAPTCHAImportCSV.Properties.Resources.logo;
+            this.logoPictureBox.Location = new System.Drawing.Point(357, 12);
+            this.logoPictureBox.Name = "logoPictureBox";
+            this.logoPictureBox.Size = new System.Drawing.Size(70, 70);
+            this.logoPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.logoPictureBox.TabIndex = 0;
+            this.logoPictureBox.TabStop = false;
             // 
             // titleLabel
             // 
@@ -178,9 +188,11 @@
             // 
             this.txtClientName.Font = new System.Drawing.Font("Comic Sans MS", 11F);
             this.txtClientName.Location = new System.Drawing.Point(180, 17);
+            this.txtClientName.MaxLength = 100;
             this.txtClientName.Name = "txtClientName";
             this.txtClientName.Size = new System.Drawing.Size(300, 28);
             this.txtClientName.TabIndex = 0;
+            this.txtClientName.TextChanged += new System.EventHandler(this.txtClientName_TextChanged);
             // 
             // lblOrderCode
             // 
@@ -412,16 +424,6 @@
             this.btnSave.Text = "Сохранить заказ";
             this.btnSave.UseVisualStyleBackColor = false;
             // 
-            // logoPictureBox
-            // 
-            this.logoPictureBox.Image = global::AuthCAPTCHAImportCSV.Properties.Resources.logo;
-            this.logoPictureBox.Location = new System.Drawing.Point(357, 12);
-            this.logoPictureBox.Name = "logoPictureBox";
-            this.logoPictureBox.Size = new System.Drawing.Size(70, 70);
-            this.logoPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.logoPictureBox.TabIndex = 0;
-            this.logoPictureBox.TabStop = false;
-            // 
             // DecorationOrderForm
             // 
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(255)))), ((int)(((byte)(204)))));
@@ -436,12 +438,12 @@
             this.Text = "Оформление заказа";
             this.headerPanel.ResumeLayout(false);
             this.headerPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).EndInit();
             this.contentPanel.ResumeLayout(false);
             this.contentPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudQuantity)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrderProducts)).EndInit();
             this.bottomPanel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).EndInit();
             this.ResumeLayout(false);
 
         }
