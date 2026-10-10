@@ -9,17 +9,24 @@ namespace AuthCAPTCHAImportCSV
 {
     public partial class CsvImportForm : Form
     {
-        private static readonly Dictionary<string, string> ReferenceTables =
-            new Dictionary<string, string>
+        private static readonly Dictionary<string, List<string>> ReferenceTables =
+            new Dictionary<string, List<string>>
         {
-            { "Role",          "RoleName" },
-            { "OrderStatus",   "StatusName" },
-            { "Unit",          "UnitName" },
-            { "Category",      "CategoryName" },
-            { "Manufacturer",  "ManufacturerName" },
-            { "Supplier",      "SupplierName" },
-            { "ProductStatus", "ProductStatusName" },
-            { "PickupPoint",   "Address" }
+            { "Role",       new List<string>  { "RoleName" } },
+            { "OrderStatus", new List<string>  { "StatusName" } },
+            { "Unit",        new List<string>  {"UnitName" } },
+            { "Category",    new List<string> { "CategoryName" } },
+            { "Manufacturer", new List<string> {"ManufacturerName" } },
+            { "Supplier",    new List<string>  {"SupplierName" } },
+            { "ProductStatus", new List<string> {"ProductStatusName" } },
+            { "PickupPoint", new List<string>
+                    {
+                        "postal_code",
+                        "city",
+                        "street",
+                        "house_number"
+                    }
+            } 
         };
 
         public CsvImportForm()
@@ -50,6 +57,7 @@ namespace AuthCAPTCHAImportCSV
 
             string table = cmbTable.SelectedItem.ToString();
             string column = ReferenceTables[table];
+            //SomeMethod(table, column[0]);
 
             try
             {

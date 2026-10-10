@@ -368,5 +368,10 @@ namespace AuthCAPTCHAImportCSV
                 txtSearch.SelectionStart = txtSearch.Text.Length;
             }
         }
+
+        private void dgvOrders_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }
