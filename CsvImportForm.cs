@@ -1,9 +1,14 @@
-﻿using MySql.Data.MySqlClient;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.IO;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using MySql.Data.MySqlClient;
+using System.IO;
 
 namespace AuthCAPTCHAImportCSV
 {
@@ -26,7 +31,7 @@ namespace AuthCAPTCHAImportCSV
                         "street",
                         "house_number"
                     }
-            } 
+            }
         };
 
         public CsvImportForm()
@@ -55,13 +60,17 @@ namespace AuthCAPTCHAImportCSV
                 return;
             }
 
-            string table = cmbTable.SelectedItem.ToString();
-            string column = ReferenceTables[table];
-            //SomeMethod(table, column[0]);
+            string table = cmbTable.SelectedItem?.ToString();
+            if (string.IsNullOrEmpty(table) || !ReferenceTables.TryGetValue(table, out var columns))
+            {
+                MessageBox.Show("Не выбрана корректная таблица.", "Ошибка",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
             try
             {
-                int inserted = ImportCsv(table, column, txtFilePath.Text);
+                int inserted = ImportCsv(table, columns, txtFilePath.Text);
                 MessageBox.Show($"Импорт завершён. Добавлено записей: {inserted}.",
                     "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -72,7 +81,8 @@ namespace AuthCAPTCHAImportCSV
             }
         }
 
-        private int ImportCsv(string table, string column, string filePath)
+        // Исправленный ImportCsv: принимает List<string> columns и делает INSERT для всех колонок
+        private int ImportCsv(string table, List<string> columns, string filePath)
         {
             int inserted = 0;
             string[] lines = ReadAllLinesAutoEncoding(filePath);
@@ -84,8 +94,7 @@ namespace AuthCAPTCHAImportCSV
                 using (var setCmd = new MySqlCommand("SET NAMES utf8mb4;", conn))
                     setCmd.ExecuteNonQuery();
 
-                int expectedCols = CountNonIdColumns(conn, table);
-
+                int expectedCols = columns.Count;
                 bool firstLine = true;
                 int lineNo = 0;
 
@@ -105,24 +114,23 @@ namespace AuthCAPTCHAImportCSV
                     var fields = ParseCsvLine(line);
                     if (fields.Count == 0) continue;
 
-                    bool ok = fields.Count == 1 ||
-                              (fields.Count == expectedCols + 1 && IsAllDigits(fields[0]));
-                    if (!ok)
+                    // Проверка: количество полей должно совпадать с количеством колонок для вставки
+                    if (fields.Count != expectedCols)
                         throw new InvalidOperationException(
-                            $"Строка {lineNo}: обнаружено {fields.Count} колонок, " +
-                            $"ожидается 1 или {expectedCols + 1}.");
+                            $"Строка {lineNo}: обнаружено {fields.Count} колонок, ожидается {expectedCols}.");
 
-                    string value = fields.Count >= 2 && IsAllDigits(fields[0])
-                        ? fields[1]
-                        : fields[0];
+                    var values = fields.Select(f => f.Trim()).ToList();
 
-                    value = value.Trim();
-                    if (string.IsNullOrEmpty(value)) continue;
+                    // Динамический INSERT: INSERT IGNORE INTO `table` (`col1`, `col2`, ...) VALUES (@v0, @v1, ...)
+                    string columnsList = string.Join(", ", columns.Select(c => $"`{c}`"));
+                    string paramList = string.Join(", ", Enumerable.Range(0, columns.Count).Select(i => $"@v{i}"));
 
                     using (var cmd = new MySqlCommand(
-                        $"INSERT IGNORE INTO `{table}` (`{column}`) VALUES (@v)", conn))
+                        $"INSERT IGNORE INTO `{table}` ({columnsList}) VALUES ({paramList})", conn))
                     {
-                        cmd.Parameters.AddWithValue("@v", value);
+                        for (int i = 0; i < columns.Count; i++)
+                            cmd.Parameters.AddWithValue($"@v{i}", values[i]);
+
                         inserted += cmd.ExecuteNonQuery();
                     }
                 }
