@@ -46,7 +46,7 @@ namespace AuthCAPTCHAImportCSV
             this.btnExport.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(255)))), ((int)(((byte)(102)))));
             this.btnExport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnExport.Font = new System.Drawing.Font("Comic Sans MS", 11F, System.Drawing.FontStyle.Bold);
-            this.btnExport.Location = new System.Drawing.Point(12, 158);
+            this.btnExport.Location = new System.Drawing.Point(12, 138);
             this.btnExport.Name = "btnExport";
             this.btnExport.Size = new System.Drawing.Size(170, 40);
             this.btnExport.TabIndex = 7;
@@ -59,7 +59,7 @@ namespace AuthCAPTCHAImportCSV
             this.btnClose.BackColor = System.Drawing.Color.White;
             this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnClose.Font = new System.Drawing.Font("Comic Sans MS", 11F, System.Drawing.FontStyle.Bold);
-            this.btnClose.Location = new System.Drawing.Point(228, 158);
+            this.btnClose.Location = new System.Drawing.Point(211, 138);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(160, 40);
             this.btnClose.TabIndex = 8;
@@ -133,7 +133,7 @@ namespace AuthCAPTCHAImportCSV
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 23F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(255)))), ((int)(((byte)(204)))));
-            this.ClientSize = new System.Drawing.Size(400, 210);
+            this.ClientSize = new System.Drawing.Size(387, 189);
             this.Controls.Add(this.lblTable);
             this.Controls.Add(this.cmbTable);
             this.Controls.Add(this.lblFile);

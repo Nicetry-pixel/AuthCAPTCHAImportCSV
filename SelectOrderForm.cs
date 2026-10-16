@@ -7,6 +7,7 @@ namespace AuthCAPTCHAImportCSV
 {
     public partial class SelectOrderForm : Form
     {
+        private bool _showPersonalData = false;
         public SelectOrderForm()
         {
             InitializeComponent();
@@ -19,7 +20,32 @@ namespace AuthCAPTCHAImportCSV
             lblUser.Text = GlobalConfig.UserFIO;
             LoadOrders();
         }
+        private void ChkShowPersonalData_CheckedChanged(object sender, EventArgs e)
+        {
+            _showPersonalData = chkShowPersonalData.Checked;
+            MaskPersonalData();
+        }
+        private void MaskPersonalData()
+        {
+            if (dgvOrders == null || dgvOrders.Rows.Count == 0) return;
+            if (!dgvOrders.Columns.Contains("OrderClientName")) return;
 
+            foreach (DataGridViewRow row in dgvOrders.Rows)
+            {
+                if (row.IsNewRow) continue;
+
+                // Берём исходное значение из DataBoundItem, а не из ячейки —
+                // иначе второй вызов замаскирует уже замаскированное
+                var bound = row.DataBoundItem as System.Data.DataRowView;
+                string original = bound != null
+                    ? bound["OrderClientName"]?.ToString() ?? ""
+                    : row.Cells["OrderClientName"].Value?.ToString() ?? "";
+
+                row.Cells["OrderClientName"].Value = _showPersonalData
+                    ? original
+                    : PersonalDataProtector.MaskFIO(original);
+            }
+        }
         private void LoadOrders()
         {
             try
@@ -49,6 +75,7 @@ namespace AuthCAPTCHAImportCSV
                         var dt = new DataTable();
                         da.Fill(dt);
                         dgvOrders.DataSource = dt;
+                        MaskPersonalData();
                         dgvOrders.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
                     }
                 }

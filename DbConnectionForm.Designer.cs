@@ -56,6 +56,8 @@
             this.btnImportCsv = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.btnCSVImport = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblServer
@@ -164,7 +166,7 @@
             this.btnContinue.Enabled = false;
             this.btnContinue.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnContinue.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Bold);
-            this.btnContinue.Location = new System.Drawing.Point(150, 360);
+            this.btnContinue.Location = new System.Drawing.Point(34, 363);
             this.btnContinue.Name = "btnContinue";
             this.btnContinue.Size = new System.Drawing.Size(200, 40);
             this.btnContinue.TabIndex = 10;
@@ -194,7 +196,7 @@
             // 
             this.btnCSVImport.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.btnCSVImport.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnCSVImport.Location = new System.Drawing.Point(150, 304);
+            this.btnCSVImport.Location = new System.Drawing.Point(34, 304);
             this.btnCSVImport.Name = "btnCSVImport";
             this.btnCSVImport.Size = new System.Drawing.Size(200, 37);
             this.btnCSVImport.TabIndex = 11;
@@ -202,12 +204,42 @@
             this.btnCSVImport.UseVisualStyleBackColor = false;
             this.btnCSVImport.Click += new System.EventHandler(this.btnImportCsv_Click);
             // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.White;
+            this.button1.Enabled = false;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Bold);
+            this.button1.Location = new System.Drawing.Point(260, 286);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(200, 40);
+            this.button1.TabIndex = 12;
+            this.button1.Text = "Экспортировать dump";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // button2
+            // 
+            this.button2.BackColor = System.Drawing.Color.White;
+            this.button2.Enabled = false;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Bold);
+            this.button2.Location = new System.Drawing.Point(260, 332);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(200, 71);
+            this.button2.TabIndex = 13;
+            this.button2.Text = "Экспортировать csv файлы";
+            this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // DbConnectionForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 23F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(255)))), ((int)(((byte)(204)))));
             this.ClientSize = new System.Drawing.Size(500, 415);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.btnCSVImport);
             this.Controls.Add(this.btnContinue);
             this.Controls.Add(this.btnRestore);
@@ -236,5 +268,7 @@
         #endregion
 
         private System.Windows.Forms.Button btnCSVImport;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
     }
 }

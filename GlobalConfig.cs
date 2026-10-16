@@ -9,7 +9,7 @@ namespace AuthCAPTCHAImportCSV
     internal class GlobalConfig
     {
         public static string ConnectionString { get; set; } =
-            "Server=localhost;Database=tradeautoproduct;Uid=root;Pwd=root;";
+            "Server=localhost;Database=tradeautoproduct;Uid=root;Pwd=root123;";
 
         public static int UserRole { get; set; } = 0;
         public static string UserFIO { get; set; } = "";

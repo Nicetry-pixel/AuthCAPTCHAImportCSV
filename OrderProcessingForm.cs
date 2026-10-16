@@ -8,6 +8,7 @@ namespace AuthCAPTCHAImportCSV
 {
     public partial class OrderProcessingForm : Form
     {
+        private bool _showPersonalData = false;
         private const int PageSize = 20;
 
         private int _page = 1;
@@ -47,6 +48,11 @@ namespace AuthCAPTCHAImportCSV
             dgvOrders.CellMouseDoubleClick += (s, e) =>
             {
                 if (e.RowIndex >= 0) ViewDetails();
+            };
+            chkShowPersonalData.CheckedChanged += (s, e) =>
+            {
+                _showPersonalData = chkShowPersonalData.Checked;
+                ApplyFilters();
             };
         }
 
@@ -262,6 +268,19 @@ namespace AuthCAPTCHAImportCSV
                 dgvOrders.Columns["OrderDate"].DefaultCellStyle.Format = "dd.MM.yyyy";
             if (dgvOrders.Columns.Contains("OrderDeliveryDate"))
                 dgvOrders.Columns["OrderDeliveryDate"].DefaultCellStyle.Format = "dd.MM.yyyy";
+            // Маскирование ФИО клиента, если режим защиты включён
+            if (dgvOrders.Columns.Contains("OrderClientName"))
+            {
+                foreach (DataGridViewRow row in dgvOrders.Rows)
+                {
+                    if (row.IsNewRow) continue;
+
+                    string original = row.Cells["OrderClientName"].Value?.ToString() ?? "";
+                    row.Cells["OrderClientName"].Value = _showPersonalData
+                        ? original
+                        : PersonalDataProtector.MaskFIO(original);
+                }
+            }
         }
 
         // Подсветка строк: зелёный — всё на складе (>3 позиции), оранжевый — есть отсутствующие

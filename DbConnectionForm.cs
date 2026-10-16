@@ -1,5 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
 
@@ -14,7 +15,7 @@ namespace AuthCAPTCHAImportCSV
             txtServer.Text = "localhost";
             txtDatabase.Text = "tradeautoproduct";
             txtUser.Text = "root";
-            txtPassword.Text = "root";
+            txtPassword.Text = "root123";
 
             txtDatabase.Enabled = (GlobalConfig.UserRole == 1);
             btnRestore.Enabled = false;
@@ -50,6 +51,8 @@ namespace AuthCAPTCHAImportCSV
                 btnRestore.Enabled = true;
                 btnImportCsv.Enabled = true;
                 btnContinue.Enabled = true;
+                button1.Enabled = true;
+                button2.Enabled = true;
             }
             catch (Exception ex)
             {
@@ -59,6 +62,8 @@ namespace AuthCAPTCHAImportCSV
                 btnRestore.Enabled = false;
                 btnImportCsv.Enabled = false;
                 btnContinue.Enabled = false;
+                button1.Enabled = false;
+                button2.Enabled = false;
             }
         }
 
@@ -99,6 +104,59 @@ namespace AuthCAPTCHAImportCSV
             MessageBox.Show("Вы вошли как Администратор. Настройки сохранены.",
                 "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
             this.Close();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            using (var sfd = new SaveFileDialog())
+            {
+                sfd.Filter = "SQL dump (*.sql)|*.sql";
+                sfd.FileName = "tradeautoproduct.sql";
+
+                if (sfd.ShowDialog() != DialogResult.OK)
+                    return;
+
+                string dumpPath = sfd.FileName;
+
+                var psi = new ProcessStartInfo
+                {
+                    FileName = @"C:\Program Files\MySQL\MySQL Server 8.0\bin\mysqldump.exe",
+                    Arguments = $"-u root -proot123 --default-character-set=utf8mb4 " +
+                                $"--result-file=\"{dumpPath}\" tradeautoproduct",
+                    UseShellExecute = false,
+                    CreateNoWindow = true,
+                    RedirectStandardError = true
+                };
+
+                try
+                {
+                    using (var proc = Process.Start(psi))
+                    {
+                        string err = proc.StandardError.ReadToEnd();
+                        proc.WaitForExit();
+
+                        if (proc.ExitCode == 0)
+                            MessageBox.Show($"Дамп сохранён:\n{dumpPath}", "Успех",
+                                MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        else
+                            MessageBox.Show($"Ошибка: {err}", "Ошибка",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Не удалось запустить mysqldump: {ex.Message}", "Ошибка",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            BackUpForm back = new BackUpForm();
+            back.ShowDialog();
+            this.Hide();
+            this.Close();  
         }
     }
 }

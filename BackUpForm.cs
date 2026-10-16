@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 using System.IO;
-
+using System.Diagnostics;
 
 namespace AuthCAPTCHAImportCSV
 {
@@ -205,7 +205,7 @@ namespace AuthCAPTCHAImportCSV
 
         private void btnClose_Click(object sender, EventArgs e)
         {
-            AuthForm auth = new AuthForm();
+            DbConnectionForm auth = new DbConnectionForm();
             auth.ShowDialog();
             Close();
         }
@@ -215,5 +215,49 @@ namespace AuthCAPTCHAImportCSV
 
         }
 
+        //private void button1_Click(object sender, EventArgs e)
+        //{
+        //    using (var sfd = new SaveFileDialog())
+        //    {
+        //        sfd.Filter = "SQL dump (*.sql)|*.sql";
+        //        sfd.FileName = "tradeautoproduct.sql";
+
+        //        if (sfd.ShowDialog() != DialogResult.OK)
+        //            return;
+
+        //        string dumpPath = sfd.FileName;
+
+        //        var psi = new ProcessStartInfo
+        //        {
+        //            FileName = @"C:\Program Files\MySQL\MySQL Server 8.0\bin\mysqldump.exe",
+        //            Arguments = $"-u root -proot123 --default-character-set=utf8mb4 " +
+        //                        $"--result-file=\"{dumpPath}\" tradeautoproduct",
+        //            UseShellExecute = false,
+        //            CreateNoWindow = true,
+        //            RedirectStandardError = true
+        //        };
+
+        //        try
+        //        {
+        //            using (var proc = Process.Start(psi))
+        //            {
+        //                string err = proc.StandardError.ReadToEnd();
+        //                proc.WaitForExit();
+
+        //                if (proc.ExitCode == 0)
+        //                    MessageBox.Show($"Дамп сохранён:\n{dumpPath}", "Успех",
+        //                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+        //                else
+        //                    MessageBox.Show($"Ошибка: {err}", "Ошибка",
+        //                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //            }
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            MessageBox.Show($"Не удалось запустить mysqldump: {ex.Message}", "Ошибка",
+        //                MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //        }
+        //    }
+        //}
     }
 }

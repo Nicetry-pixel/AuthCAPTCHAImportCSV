@@ -2,6 +2,7 @@
 {
     partial class SelectOrderForm
     {
+        private System.Windows.Forms.CheckBox chkShowPersonalData;
         private System.ComponentModel.IContainer components = null;
         private System.Windows.Forms.Panel topPanel;
         private System.Windows.Forms.Label lblUser;
@@ -25,6 +26,7 @@
             this.topPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrders)).BeginInit();
             this.SuspendLayout();
+            this.chkShowPersonalData = new System.Windows.Forms.CheckBox();
             // 
             // topPanel
             // 
@@ -36,6 +38,7 @@
             this.topPanel.Name = "topPanel";
             this.topPanel.Size = new System.Drawing.Size(900, 50);
             this.topPanel.TabIndex = 1;
+            this.topPanel.Controls.Add(this.chkShowPersonalData);
             // 
             // lblUser
             // 
@@ -46,6 +49,16 @@
             this.lblUser.Size = new System.Drawing.Size(45, 23);
             this.lblUser.TabIndex = 0;
             this.lblUser.Text = "ФИО";
+            //
+            // CheckBox
+            //
+            this.chkShowPersonalData.AutoSize = true;
+            this.chkShowPersonalData.Font = new System.Drawing.Font("Comic Sans MS", 10F);
+            this.chkShowPersonalData.Location = new System.Drawing.Point(160, 18);
+            this.chkShowPersonalData.Name = "chkShowPersonalData";
+            this.chkShowPersonalData.Size = new System.Drawing.Size(280, 24);
+            this.chkShowPersonalData.Text = "Показать персональные данные";
+            this.chkShowPersonalData.UseVisualStyleBackColor = true;
             // 
             // btnBack
             // 

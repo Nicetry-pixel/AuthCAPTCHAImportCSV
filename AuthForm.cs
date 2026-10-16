@@ -132,19 +132,7 @@ namespace AuthCAPTCHAImportCSV
 
         private void cancelButton_Click(object sender, EventArgs e)
         {
-            var result = MessageBox.Show("Вы хотите сделать резервное копирование?",
-                   "Запрос на резервное копирование",
-                   MessageBoxButtons.YesNo,
-                   MessageBoxIcon.Question);
-            if (result == DialogResult.Yes)
-            {
-                BackUpForm back = new BackUpForm();
-                back.ShowDialog();
-            }
-            else
-            {
-                MessageBox.Show("Переход отменён.", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
+            MessageBox.Show("Вы точно хотите выйти?", "Информация", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
             this.FormClosing -= AuthForm_FormClosing;
             Close();
         }

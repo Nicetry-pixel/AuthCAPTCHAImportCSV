@@ -118,6 +118,7 @@
     <Compile Include="OrderProcessingForm.Designer.cs">
       <DependentUpon>OrderProcessingForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="PersonalDataProtector.cs" />
     <Compile Include="ProductEditForm.cs">
       <SubType>Form</SubType>
     </Compile>

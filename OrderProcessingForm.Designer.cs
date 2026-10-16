@@ -2,6 +2,7 @@
 {
     partial class OrderProcessingForm
     {
+        private System.Windows.Forms.CheckBox chkShowPersonalData;
         private System.ComponentModel.IContainer components = null;
 
         private System.Windows.Forms.Panel headerPanel;
@@ -44,6 +45,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            this.chkShowPersonalData = new System.Windows.Forms.CheckBox();
             this.headerPanel = new System.Windows.Forms.Panel();
             this.logoPictureBox = new System.Windows.Forms.PictureBox();
             this.titleLabel = new System.Windows.Forms.Label();
@@ -77,6 +79,17 @@
             this.contextMenuStrip1.SuspendLayout();
             this.pagerPanel.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // chkShowPersonalData
+            // 
+            this.chkShowPersonalData.AutoSize = true;
+            this.chkShowPersonalData.Font = new System.Drawing.Font("Comic Sans MS", 10F);
+            this.chkShowPersonalData.Location = new System.Drawing.Point(10, 60);
+            this.chkShowPersonalData.Name = "chkShowPersonalData";
+            this.chkShowPersonalData.Size = new System.Drawing.Size(245, 23);
+            this.chkShowPersonalData.TabIndex = 9;
+            this.chkShowPersonalData.Text = "Показать персональные данные";
+            this.chkShowPersonalData.UseVisualStyleBackColor = true;
             // 
             // headerPanel
             // 
@@ -148,6 +161,7 @@
             this.filterPanel.Controls.Add(this.lblSort);
             this.filterPanel.Controls.Add(this.cmbSort);
             this.filterPanel.Controls.Add(this.lblCount);
+            this.filterPanel.Controls.Add(this.chkShowPersonalData);
             this.filterPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.filterPanel.Location = new System.Drawing.Point(0, 70);
             this.filterPanel.Name = "filterPanel";
