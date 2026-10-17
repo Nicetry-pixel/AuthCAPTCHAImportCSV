@@ -9,6 +9,7 @@ namespace AuthCAPTCHAImportCSV
 {
     public partial class AuthForm : Form
     {
+        private bool _skipCloseConfirmation = false;
         private int failedAttempts = 0;
         private bool isProcessing = false;
         private readonly Random rnd = new Random();
@@ -25,7 +26,7 @@ namespace AuthCAPTCHAImportCSV
         public AuthForm()
         {
             InitializeComponent();
-            this.FormClosing += AuthForm_FormClosing;
+            //this.FormClosing += AuthForm_FormClosing;
 
             captchas = new List<(Image, string)>
             {
@@ -69,15 +70,17 @@ namespace AuthCAPTCHAImportCSV
 
         // ---------------- Закрытие формы ----------------
 
-        private void AuthForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (MessageBox.Show("Закрыть?", "Подтверждение",
-                MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
-            {
-                e.Cancel = true;
-                ShowLoginForm();
-            }
-        }
+        //private void AuthForm_FormClosing(object sender, FormClosingEventArgs e)
+        //{
+        //    if (_skipCloseConfirmation) return; // <-- если это переход, не спрашиваем
+
+        //    if (MessageBox.Show("Закрыть?", "Подтверждение",
+        //        MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+        //    {
+        //        e.Cancel = true;
+        //        ShowLoginForm();
+        //    }
+        //}
 
         // ---------------- Управление состоянием формы ----------------
 
@@ -133,7 +136,7 @@ namespace AuthCAPTCHAImportCSV
         private void cancelButton_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Вы точно хотите выйти?", "Информация", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-            this.FormClosing -= AuthForm_FormClosing;
+            //this.FormClosing -= AuthForm_FormClosing;
             Close();
         }
 
@@ -232,7 +235,8 @@ namespace AuthCAPTCHAImportCSV
             {
                 case 1:
                     using (var f = new DbConnectionForm()) f.ShowDialog();
-                    returnToLogin = true;
+                    _skipCloseConfirmation = true; // <-- добавляем
+                    returnToLogin = false;
                     break;
                 case 2:
                     using (var f = new ManagerForm()) f.ShowDialog();

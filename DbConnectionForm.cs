@@ -101,9 +101,12 @@ namespace AuthCAPTCHAImportCSV
 
         private void btnContinue_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Вы вошли как Администратор. Настройки сохранены.",
-                "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            this.Close();
+
+            // Открываем меню администратора
+            var adminMenu = new AdminMenuForm();
+            adminMenu.Show();
+
+            this.Hide();
         }
 
         private void button1_Click(object sender, EventArgs e)

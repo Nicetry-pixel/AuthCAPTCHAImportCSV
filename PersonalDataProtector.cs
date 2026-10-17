@@ -45,5 +45,16 @@ namespace AuthCAPTCHAImportCSV
             if (comma < 0) return address.Substring(0, Math.Min(4, address.Length)) + "***";
             return address.Substring(0, comma + 1) + " ***";
         }
+
+        /// <summary>
+        /// Маскирует email: "user@mail.ru" → "u***@mail.ru"
+        /// </summary>
+        public static string MaskEmail(string email)
+        {
+            if (string.IsNullOrWhiteSpace(email)) return "";
+            int at = email.IndexOf('@');
+            if (at <= 1) return email;
+            return email.Substring(0, 1) + "***" + email.Substring(at);
+        }
     }
 }
