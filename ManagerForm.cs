@@ -49,5 +49,10 @@ namespace AuthCAPTCHAImportCSV
         {
             using (var f = new OrderProcessingForm()) f.ShowDialog();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            using (var user = new SelectUserForm()) user.ShowDialog();
+        }
     }
 }

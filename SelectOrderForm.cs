@@ -22,7 +22,7 @@ namespace AuthCAPTCHAImportCSV
         }
         private void ChkShowPersonalData_CheckedChanged(object sender, EventArgs e)
         {
-            _showPersonalData = chkShowPersonalData.Checked;
+            //_showPersonalData = chkShowPersonalData.Checked;
             MaskPersonalData();
         }
         private void MaskPersonalData()
@@ -45,6 +45,21 @@ namespace AuthCAPTCHAImportCSV
                     ? original
                     : PersonalDataProtector.MaskFIO(original);
             }
+            foreach (DataGridViewRow row in dgvOrders.Rows)
+            {
+                if (row.IsNewRow) continue;
+
+                // Берём исходное значение из DataBoundItem, а не из ячейки —
+                // иначе второй вызов замаскирует уже замаскированное
+                var bound = row.DataBoundItem as System.Data.DataRowView;
+                string original = bound != null
+                    ? bound["PickupAddress"]?.ToString() ?? ""
+                    : row.Cells["PickupAddress"].Value?.ToString() ?? "";
+
+                row.Cells["PickupAddress"].Value = _showPersonalData
+                    ? original
+                    : PersonalDataProtector.MaskAddress(original);
+            }
         }
         private void LoadOrders()
         {
@@ -54,7 +69,7 @@ namespace AuthCAPTCHAImportCSV
                 {
                     conn.Open();
                     string sql =
-                        "SELECT o.`OrderID`, " +
+                        "SELECT " +
                         "       s.`StatusName`, " +
                         "       o.`OrderDate`, " +
                         "       o.`OrderDeliveryDate`, " +
@@ -77,6 +92,7 @@ namespace AuthCAPTCHAImportCSV
                         dgvOrders.DataSource = dt;
                         MaskPersonalData();
                         dgvOrders.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                        ConfigureColumns();
                     }
                 }
             }
@@ -85,6 +101,21 @@ namespace AuthCAPTCHAImportCSV
                 MessageBox.Show($"Ошибка загрузки заказов: {ex.Message}", "Ошибка",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+        private void ConfigureColumns()
+        {
+            if (dgvOrders.Columns.Contains("StatusName"))
+                dgvOrders.Columns["StatusName"].HeaderText = "Статус";
+            if (dgvOrders.Columns.Contains("OrderDate"))
+                dgvOrders.Columns["OrderDate"].HeaderText = "Дата создания";
+            if (dgvOrders.Columns.Contains("OrderDeliveryDate"))
+                dgvOrders.Columns["OrderDeliveryDate"].HeaderText = "Дата доставки";
+            if (dgvOrders.Columns.Contains("PickupAddress"))
+                dgvOrders.Columns["PickupAddress"].HeaderText = "Адрес";
+            if (dgvOrders.Columns.Contains("OrderClientName"))
+                dgvOrders.Columns["OrderClientName"].HeaderText = "ФИО Клиента";
+            if (dgvOrders.Columns.Contains("OrderCode"))
+                dgvOrders.Columns["OrderCode"].HeaderText = "Код заказа";
         }
     }
 }

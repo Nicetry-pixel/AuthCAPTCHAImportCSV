@@ -15,7 +15,7 @@ namespace AuthCAPTCHAImportCSV
             txtServer.Text = "localhost";
             txtDatabase.Text = "tradeautoproduct";
             txtUser.Text = "root";
-            txtPassword.Text = "root123";
+            txtPassword.Text = "root";
 
             txtDatabase.Enabled = (GlobalConfig.UserRole == 1);
             btnRestore.Enabled = false;
@@ -101,12 +101,14 @@ namespace AuthCAPTCHAImportCSV
 
         private void btnContinue_Click(object sender, EventArgs e)
         {
+            MessageBox.Show("Настройки успешно сохраненыю. Вы вошли под Администратором.", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            this.Close();
 
-            // Открываем меню администратора
-            var adminMenu = new AdminMenuForm();
-            adminMenu.Show();
-
-            this.Hide();
+            using (var adminMenu = new AuthForm())
+            {
+                adminMenu.ShowDialog();
+            }
+            this.Close();       
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -124,7 +126,7 @@ namespace AuthCAPTCHAImportCSV
                 var psi = new ProcessStartInfo
                 {
                     FileName = @"C:\Program Files\MySQL\MySQL Server 8.0\bin\mysqldump.exe",
-                    Arguments = $"-u root -proot123 --default-character-set=utf8mb4 " +
+                    Arguments = $"-u root -proot --default-character-set=utf8mb4 " +
                                 $"--result-file=\"{dumpPath}\" tradeautoproduct",
                     UseShellExecute = false,
                     CreateNoWindow = true,

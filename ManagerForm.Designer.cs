@@ -35,6 +35,7 @@ namespace AuthCAPTCHAImportCSV
             this.btn_exit = new System.Windows.Forms.Button();
             this.btnCreateOrder = new System.Windows.Forms.Button();
             this.btnOrder = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btn_product
@@ -42,10 +43,10 @@ namespace AuthCAPTCHAImportCSV
             this.btn_product.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(255)))), ((int)(((byte)(102)))));
             this.btn_product.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_product.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Bold);
-            this.btn_product.Location = new System.Drawing.Point(120, 186);
+            this.btn_product.Location = new System.Drawing.Point(120, 279);
             this.btn_product.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btn_product.Name = "btn_product";
-            this.btn_product.Size = new System.Drawing.Size(390, 130);
+            this.btn_product.Size = new System.Drawing.Size(390, 100);
             this.btn_product.TabIndex = 9;
             this.btn_product.Text = "Товары";
             this.btn_product.UseVisualStyleBackColor = false;
@@ -56,10 +57,10 @@ namespace AuthCAPTCHAImportCSV
             this.btn_order.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(255)))), ((int)(((byte)(102)))));
             this.btn_order.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_order.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Bold);
-            this.btn_order.Location = new System.Drawing.Point(120, 14);
+            this.btn_order.Location = new System.Drawing.Point(120, 145);
             this.btn_order.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btn_order.Name = "btn_order";
-            this.btn_order.Size = new System.Drawing.Size(390, 130);
+            this.btn_order.Size = new System.Drawing.Size(390, 100);
             this.btn_order.TabIndex = 10;
             this.btn_order.Text = "Заказы";
             this.btn_order.UseVisualStyleBackColor = false;
@@ -70,10 +71,10 @@ namespace AuthCAPTCHAImportCSV
             this.btn_exit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(255)))), ((int)(((byte)(102)))));
             this.btn_exit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_exit.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Bold);
-            this.btn_exit.Location = new System.Drawing.Point(120, 684);
+            this.btn_exit.Location = new System.Drawing.Point(120, 714);
             this.btn_exit.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btn_exit.Name = "btn_exit";
-            this.btn_exit.Size = new System.Drawing.Size(390, 130);
+            this.btn_exit.Size = new System.Drawing.Size(390, 100);
             this.btn_exit.TabIndex = 11;
             this.btn_exit.Text = "Выход";
             this.btn_exit.UseVisualStyleBackColor = false;
@@ -84,10 +85,10 @@ namespace AuthCAPTCHAImportCSV
             this.btnCreateOrder.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(255)))), ((int)(((byte)(102)))));
             this.btnCreateOrder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCreateOrder.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Bold);
-            this.btnCreateOrder.Location = new System.Drawing.Point(120, 357);
+            this.btnCreateOrder.Location = new System.Drawing.Point(120, 424);
             this.btnCreateOrder.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnCreateOrder.Name = "btnCreateOrder";
-            this.btnCreateOrder.Size = new System.Drawing.Size(390, 130);
+            this.btnCreateOrder.Size = new System.Drawing.Size(390, 100);
             this.btnCreateOrder.TabIndex = 12;
             this.btnCreateOrder.Text = "Оформить заказ";
             this.btnCreateOrder.UseVisualStyleBackColor = false;
@@ -98,14 +99,28 @@ namespace AuthCAPTCHAImportCSV
             this.btnOrder.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(255)))), ((int)(((byte)(102)))));
             this.btnOrder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnOrder.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Bold);
-            this.btnOrder.Location = new System.Drawing.Point(120, 521);
+            this.btnOrder.Location = new System.Drawing.Point(120, 570);
             this.btnOrder.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnOrder.Name = "btnOrder";
-            this.btnOrder.Size = new System.Drawing.Size(390, 130);
+            this.btnOrder.Size = new System.Drawing.Size(390, 100);
             this.btnOrder.TabIndex = 13;
             this.btnOrder.Text = "Обработка заказов";
             this.btnOrder.UseVisualStyleBackColor = false;
             this.btnOrder.Click += new System.EventHandler(this.btnOrder_Click);
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(255)))), ((int)(((byte)(102)))));
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Bold);
+            this.button1.Location = new System.Drawing.Point(120, 14);
+            this.button1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(390, 100);
+            this.button1.TabIndex = 14;
+            this.button1.Text = "Пользователи";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // ManagerForm
             // 
@@ -113,6 +128,7 @@ namespace AuthCAPTCHAImportCSV
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(255)))), ((int)(((byte)(204)))));
             this.ClientSize = new System.Drawing.Size(609, 828);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.btnOrder);
             this.Controls.Add(this.btnCreateOrder);
             this.Controls.Add(this.btn_exit);
@@ -137,5 +153,6 @@ namespace AuthCAPTCHAImportCSV
         private System.Windows.Forms.Button btn_exit;
         private System.Windows.Forms.Button btnCreateOrder;
         private System.Windows.Forms.Button btnOrder;
+        private System.Windows.Forms.Button button1;
     }
 }
